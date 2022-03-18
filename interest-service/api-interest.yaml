@@ -1,0 +1,132 @@
+openapi: 3.0.1
+info:
+  title: Interest API
+  description: An API used for managing interests for the Eeventify application
+  version: v1
+paths:
+  /api/Interests:
+    get:
+      tags:
+        - Interests
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Interest'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Interest'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Interest'
+    post:
+      tags:
+        - Interests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Interest'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Interest'
+  '/api/Interests/{id}':
+    get:
+      tags:
+        - Interests
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Interest'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Interest'
+    put:
+      tags:
+        - Interests
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Interest'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Interests
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    Interest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
