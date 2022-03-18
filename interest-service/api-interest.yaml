@@ -8,6 +8,8 @@ paths:
     get:
       tags:
         - Interests
+      summary: Get a list of all Interests
+      description: ''
       responses:
         '200':
           description: Success
@@ -30,7 +32,10 @@ paths:
     post:
       tags:
         - Interests
+      summary: Creates an Interest
+      description: "Sample request:\r\n            \r\n    POST /Interest\r\n    {\r\n       \"id\": 1,\r\n       \"name\": \"Tennis\",\r\n       \"description\": \"Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each.\"\r\n    }"
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
@@ -54,13 +59,20 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/Interest'
+        '201':
+          description: Returns the newly created item
+        '400':
+          description: If the item is null
   '/Interests/{id}':
     get:
       tags:
         - Interests
+      summary: Get a specific Interest by ID
+      description: ''
       parameters:
         - name: id
           in: path
+          description: ''
           required: true
           schema:
             type: integer
@@ -78,17 +90,23 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/Interest'
+        '404':
+          description: Item not found
     put:
       tags:
         - Interests
+      summary: Updates an Interest
+      description: "Sample request:\r\n            \r\n    PUT /Interest\r\n    {\r\n       \"id\": 1,\r\n       \"name\": \"Tennis\",\r\n       \"description\": \"Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each.\"\r\n    }"
       parameters:
         - name: id
           in: path
+          description: ''
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
@@ -102,12 +120,19 @@ paths:
       responses:
         '200':
           description: Success
+        '204':
+          description: Returns updated item
+        '400':
+          description: If the item is null
     delete:
       tags:
         - Interests
+      summary: Deletes an Interest
+      description: ''
       parameters:
         - name: id
           in: path
+          description: ''
           required: true
           schema:
             type: integer
@@ -115,6 +140,8 @@ paths:
       responses:
         '200':
           description: Success
+        '404':
+          description: Item not found
 components:
   schemas:
     Interest:

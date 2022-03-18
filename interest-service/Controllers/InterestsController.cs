@@ -21,14 +21,28 @@ namespace interest_service.Controllers
             _context = context;
         }
 
-        // GET: api/Interests
+        // GET: Interests
+        /// <summary>
+        /// Get a list of all Interests
+        /// </summary>
+        /// <returns>A list of all Interests</returns>
+        /// <remarks>
+        /// </remarks>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interest>>> GetInterests()
         {
             return await _context.Interests.ToListAsync();
         }
 
-        // GET: api/Interests/5
+        // GET: Interests/5
+        /// <summary>
+        /// Get a specific Interest
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The requested Interest</returns>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="404">Item not found</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<Interest>> GetInterest(long id)
         {
@@ -42,8 +56,27 @@ namespace interest_service.Controllers
             return interest;
         }
 
-        // PUT: api/Interests/5
+        // PUT: Interests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates an Interest
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="interest"></param>
+        /// <returns>The updated Interest</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /Interest
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Tennis",
+        ///        "description": "Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each."
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="204">Returns updated item</response>
+        /// <response code="400">If the item is null</response>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInterest(long id, Interest interest)
         {
@@ -73,8 +106,26 @@ namespace interest_service.Controllers
             return NoContent();
         }
 
-        // POST: api/Interests
+        // POST: Interests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Creates an Interest
+        /// </summary>
+        /// <param name="interest"></param>
+        /// <returns>A newly created Interest</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Interest
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Tennis",
+        ///        "description": "Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each."
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>
         [HttpPost]
         public async Task<ActionResult<Interest>> PostInterest(Interest interest)
         {
@@ -84,7 +135,14 @@ namespace interest_service.Controllers
             return CreatedAtAction(nameof(GetInterest), new { id = interest.Id }, interest);
         }
 
-        // DELETE: api/Interests/5
+        // DELETE: Interests/5
+        /// <summary>
+        /// Deletes an Interest
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        /// <response code="404">Item not found</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInterest(long id)
         {
