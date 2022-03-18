@@ -4,7 +4,7 @@ info:
   description: An API used for managing interests for the Eeventify application
   version: v1
 paths:
-  /api/Interests:
+  /Interests:
     get:
       tags:
         - Interests
@@ -54,7 +54,7 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/Interest'
-  '/api/Interests/{id}':
+  '/Interests/{id}':
     get:
       tags:
         - Interests

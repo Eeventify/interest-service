@@ -10,7 +10,7 @@ using interest_service.Models;
 
 namespace interest_service.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class InterestsController : ControllerBase
     {
