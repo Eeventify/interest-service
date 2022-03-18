@@ -14,17 +14,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Interest'
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Interest'
-            text/json:
               schema:
                 type: array
                 items:
@@ -47,27 +37,23 @@ paths:
             schema:
               $ref: '#/components/schemas/Interest'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Returns the newly created item
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/Interest'
             application/json:
               schema:
                 $ref: '#/components/schemas/Interest'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/Interest'
-        '201':
-          description: Returns the newly created item
         '400':
           description: If the item is null
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
   '/Interests/{id}':
     get:
       tags:
         - Interests
-      summary: Get a specific Interest by ID
+      summary: Get a specific Interest
       description: ''
       parameters:
         - name: id
@@ -81,17 +67,15 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/Interest'
             application/json:
-              schema:
-                $ref: '#/components/schemas/Interest'
-            text/json:
               schema:
                 $ref: '#/components/schemas/Interest'
         '404':
           description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
     put:
       tags:
         - Interests
@@ -118,12 +102,20 @@ paths:
             schema:
               $ref: '#/components/schemas/Interest'
       responses:
-        '200':
-          description: Success
         '204':
-          description: Returns updated item
+          description: No Content
         '400':
           description: If the item is null
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
     delete:
       tags:
         - Interests
@@ -138,13 +130,19 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
-          description: Success
+        '204':
+          description: No content
         '404':
           description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
     Interest:
+      required:
+        - name
       type: object
       properties:
         id:
@@ -152,8 +150,27 @@ components:
           format: int64
         name:
           type: string
-          nullable: true
         description:
           type: string
           nullable: true
       additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: { }

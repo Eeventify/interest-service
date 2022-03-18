@@ -12,6 +12,7 @@ namespace interest_service.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class InterestsController : ControllerBase
     {
         private readonly InterestContext _context;
@@ -44,6 +45,8 @@ namespace interest_service.Controllers
         /// </remarks>
         /// <response code="404">Item not found</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Interest>> GetInterest(long id)
         {
             var interest = await _context.Interests.FindAsync(id);
@@ -75,9 +78,13 @@ namespace interest_service.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="204">Returns updated item</response>
+        /// <response code="204">No Content</response>
         /// <response code="400">If the item is null</response>
+        /// <response code="404">Item not found</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PutInterest(long id, Interest interest)
         {
             if (id != interest.Id)
@@ -127,6 +134,8 @@ namespace interest_service.Controllers
         /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If the item is null</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Interest>> PostInterest(Interest interest)
         {
             _context.Interests.Add(interest);
@@ -142,8 +151,11 @@ namespace interest_service.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <remarks></remarks>
+        /// <response code="204">No content</response>
         /// <response code="404">Item not found</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteInterest(long id)
         {
             var interest = await _context.Interests.FindAsync(id);
