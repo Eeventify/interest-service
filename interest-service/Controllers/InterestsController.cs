@@ -26,24 +26,24 @@ namespace interest_service.Controllers
         /// <summary>
         /// Get a list of Interests
         /// </summary>
-        /// <param name="name">Return only Interests starting with specified name (optional)</param>
+        /// <param name="search">Return only Interests starting with search term (optional)</param>
         /// <param name="sort">Sort results alphabetically on name (default = false)</param>
         /// <returns>A list of all Interests</returns>
         /// <remarks>
         /// </remarks>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string name, bool sort)
+        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string search, bool sort)
         {
             List<Interest> result;
 
-            if (name == null)
+            if (search == null)
             {
                 result = await _context.Interests.ToListAsync();
             }
             else
             {
                 result = await _context.Interests
-                    .Where(interest => interest.Name.StartsWith(name))
+                    .Where(interest => interest.Name.ToUpper().StartsWith(search.ToUpper()))
                     .ToListAsync();
             }
             
