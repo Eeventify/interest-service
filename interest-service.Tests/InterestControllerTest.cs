@@ -64,7 +64,10 @@ FROM Interests;";
             var interest = result.Value;
 
             // Assert
+            Assert.NotNull(interest);
+            #pragma warning disable CS8602 // Dereference of a possibly null reference.
             Assert.Equal("Desc One", interest.Description);
+            #pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
 
         [Fact]
