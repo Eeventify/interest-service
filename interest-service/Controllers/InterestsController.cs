@@ -24,15 +24,30 @@ namespace interest_service.Controllers
 
         // GET: Interests
         /// <summary>
-        /// Get a list of all Interests
+        /// Get a list of Interests
         /// </summary>
+        /// <param name="search">Return only Interests starting with search term (optional)</param>
+        /// <param name="sort">Sort results alphabetically on name (default = false)</param>
         /// <returns>A list of all Interests</returns>
         /// <remarks>
         /// </remarks>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests()
+        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string search = null, bool sort = false)
         {
-            return await _context.Interests.ToListAsync();
+            var query = from x in _context.Interests
+                        select x;
+
+            if (search != null)
+            {
+                query = query.Where(interest => interest.Name.ToUpper().StartsWith(search.ToUpper()));
+            }
+            
+            if (sort)
+            {
+                query = query.OrderBy(interest => interest.Name);
+            }
+
+            return await query.ToListAsync();
         }
 
         // GET: Interests/5
@@ -125,7 +140,6 @@ namespace interest_service.Controllers
         ///
         ///     POST /Interest
         ///     {
-        ///        "id": 1,
         ///        "name": "Tennis",
         ///        "description": "Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each."
         ///     }

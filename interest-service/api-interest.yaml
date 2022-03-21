@@ -8,8 +8,20 @@ paths:
     get:
       tags:
         - Interests
-      summary: Get a list of all Interests
+      summary: Get a list of Interests
       description: ''
+      parameters:
+        - name: search
+          in: query
+          description: Return only Interests starting with search term (optional)
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort results alphabetically on name (default = false)
+          schema:
+            type: boolean
+            default: false
       responses:
         '200':
           description: Success
@@ -23,7 +35,7 @@ paths:
       tags:
         - Interests
       summary: Creates an Interest
-      description: "Sample request:\r\n            \r\n    POST /Interest\r\n    {\r\n       \"id\": 1,\r\n       \"name\": \"Tennis\",\r\n       \"description\": \"Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each.\"\r\n    }"
+      description: "Sample request:\r\n            \r\n    POST /Interest\r\n    {\r\n       \"name\": \"Tennis\",\r\n       \"description\": \"Tennis is a racket sport that can be played individually against a single opponent or between two teams of two players each.\"\r\n    }"
       requestBody:
         description: ''
         content:
