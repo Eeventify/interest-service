@@ -34,25 +34,20 @@ namespace interest_service.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string search = null, bool sort = false)
         {
-            List<Interest> result;
+            var query = from x in _context.Interests
+                        select x;
 
-            if (search == null)
+            if (search != null)
             {
-                result = await _context.Interests.ToListAsync();
-            }
-            else
-            {
-                result = await _context.Interests
-                    .Where(interest => interest.Name.ToUpper().StartsWith(search.ToUpper()))
-                    .ToListAsync();
+                query = query.Where(interest => interest.Name.ToUpper().StartsWith(search.ToUpper()));
             }
             
             if (sort)
             {
-                result = result.OrderBy(interest => interest.Name).ToList();
+                query = query.OrderBy(interest => interest.Name);
             }
 
-            return result;
+            return await query.ToListAsync();
         }
 
         // GET: Interests/5
