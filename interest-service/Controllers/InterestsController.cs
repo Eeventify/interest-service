@@ -32,7 +32,7 @@ namespace interest_service.Controllers
         /// <remarks>
         /// </remarks>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string search, bool sort)
+        public async Task<ActionResult<IEnumerable<Interest>>> GetInterests(string search = null, bool sort = false)
         {
             List<Interest> result;
 

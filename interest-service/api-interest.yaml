@@ -11,9 +11,9 @@ paths:
       summary: Get a list of Interests
       description: ''
       parameters:
-        - name: name
+        - name: search
           in: query
-          description: Return only Interests starting with specified name (optional)
+          description: Return only Interests starting with search term (optional)
           schema:
             type: string
         - name: sort
@@ -21,6 +21,7 @@ paths:
           description: Sort results alphabetically on name (default = false)
           schema:
             type: boolean
+            default: false
       responses:
         '200':
           description: Success
