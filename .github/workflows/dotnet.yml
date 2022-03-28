@@ -128,15 +128,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: docs
-          
-      - name: Check for changes
-        id: check
-        run: git status -s
       
       - name: Commit files
         id: commit
+        continue-on-error: true
         run: |
-          echo ${{ steps.check.outputs }}
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add *
