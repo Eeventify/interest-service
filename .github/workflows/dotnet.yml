@@ -37,6 +37,7 @@ jobs:
       with:
         name: doc
         path: ./interest-service/api-interest.yaml
+        retention-days: 1
 
   publish:
 
