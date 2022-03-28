@@ -35,7 +35,7 @@ jobs:
     - name: Upload documentation file
       uses: actions/upload-artifact@v3
       with:
-        name: doc
+        name: docs
         path: ./interest-service/api-interest.yaml
         retention-days: 1
 
