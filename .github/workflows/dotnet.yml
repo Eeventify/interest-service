@@ -42,6 +42,7 @@ jobs:
   publish:
 
     runs-on: ubuntu-latest
+    if: false
     needs: build
     permissions:
       contents: read
