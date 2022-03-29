@@ -129,9 +129,13 @@ jobs:
         with:
           name: docs
       
+      - name: Check Git status
+        id: check
+        run: git status -s
+      
       - name: Commit files
         id: commit
-        continue-on-error: true
+        if: steps.check.outputs.var != ''
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
