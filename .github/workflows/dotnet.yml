@@ -130,12 +130,12 @@ jobs:
         with:
           name: docs
       
+      - name: Testt
+        run: touch testt.txt
+      
       - name: Check Git status
         id: check
         run: echo "::set-output name=status::$(git status -s)"
-          
-      - name: Echo
-        run: echo ${{ steps.check.outputs.status }}
       
       - name: Commit files
         id: commit
@@ -152,4 +152,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          repository: Eeventify/main
+          branch: main
