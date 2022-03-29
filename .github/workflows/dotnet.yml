@@ -141,8 +141,8 @@ jobs:
         id: commit
         if: steps.check.outputs.status != ''
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email ${{ secrets.CD_EMAIL }}
+          git config --local user.name "jeffrey-fontys"
           git add *
           git commit -m "Add changes" -a
         
