@@ -36,10 +36,10 @@ if (app.Environment.IsDevelopment())
 }
 
 // Migration
-using (IServiceScope serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-{
-    serviceScope.ServiceProvider.GetRequiredService<InterestContext>().Database.Migrate();
-}
+//using (IServiceScope serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+//{
+//    serviceScope.ServiceProvider.GetRequiredService<InterestContext>().Database.Migrate();
+//}
 
 app.UseAuthorization();
 
