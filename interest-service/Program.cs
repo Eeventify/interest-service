@@ -35,6 +35,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Migration
+using (IServiceScope serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    serviceScope.ServiceProvider.GetRequiredService<InterestContext>().Database.Migrate();
+}
+
 app.UseAuthorization();
 
 app.MapControllers();
