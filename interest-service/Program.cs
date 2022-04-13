@@ -14,6 +14,11 @@ builder.Services.AddDbContext<InterestContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.AddServer(new OpenApiServer
+    {
+        Url = "http://office.pepr.com:25252",
+        Description = "Production server"
+    });
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",

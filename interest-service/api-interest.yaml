@@ -3,6 +3,9 @@ info:
   title: Interest API
   description: An API used for managing interests for the Eeventify application
   version: v1
+servers:
+  - url: http://office.pepr.com:25252
+    description: Production server
 paths:
   /Interests:
     get:
